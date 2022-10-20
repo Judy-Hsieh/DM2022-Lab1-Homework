@@ -1,4 +1,5 @@
 import nltk
+import re
 
 """
 Helper functions for data mining lab session 2018 Fall Semester
@@ -8,11 +9,14 @@ Email: ellfae@gmail.com
 
 def format_rows(docs):
     """ format the text field and strip special characters """
-    D = []
-    for d in docs.data:
-        temp_d = " ".join(d.split("\n")).strip('\n\t')
-        D.append([temp_d])
-    return D
+    # split \n and \t 
+    # rstrip=get rid of trailing(否則後面會多一個空字串)
+    sentence, score = [], []
+    for d in docs:
+        temp_d = re.split('\t+|\n',d.rstrip('\t|\n'))
+        sentence.append(temp_d[0])
+        score.append(temp_d[1])
+    return sentence, score
 
 def format_labels(target, docs):
     """ format the labels """
