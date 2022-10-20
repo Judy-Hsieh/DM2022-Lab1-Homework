@@ -15,7 +15,7 @@ def format_rows(docs):
     for d in docs:
         temp_d = re.split('\t+|\n',d.rstrip('\t|\n'))
         sentence.append(temp_d[0])
-        score.append(temp_d[1])
+        score.append(int(temp_d[1]))
     return sentence, score
 
 def format_labels(target, docs):
